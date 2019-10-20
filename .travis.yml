@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- '7'
+cache:
+  bundler: true
+  directories:
+  - node_modules
+env:
+  matrix:
+  - TRAVIS=true
+script:
+- npm test
+after_success:
+- npm run coveralls
