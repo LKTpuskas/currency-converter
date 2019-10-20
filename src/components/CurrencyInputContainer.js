@@ -1,19 +1,29 @@
-import React, { useState, useEffect, useRef } from "react";
-import { css } from "styled-components";
-
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import CurrencyDropdown from "./CurrencyDropdown";
-import { currencyFormatter } from '../Utils'
-
-const inputStyle = css`
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    margin: 0;
-  }
+import { currencyFormatter } from "../Utils";
+const WHITE = "#f6f7f8";
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 350px 350px;
+  grid-gap: 48px;
 `;
-
+const LabelContainer = styled(Container)`
+  color: ${WHITE};
+  font-size: 16px;
+`;
+const Input = styled.input`
+  padding: 40px 15px;
+  background: #2b3950;
+  border: 0;
+  color: white;
+  font-size: 40px;
+  font-weight: normal;
+`;
+const Text = styled.p`
+  color: ${WHITE};
+  font-size: 16px;
+`;
 export function convertCurrency(
   quotes,
   currencySelected,
@@ -29,25 +39,21 @@ export function convertCurrency(
   if (currencySelected in quotes) {
     return isSourceActive
       ? currencyFormatter['*'](inputValue, quotes[currencySelected])
-      : Number(inputValue) 
+      : Number(inputValue);
   }
 }
-
 function CurrencyInput({ currencySelected, quotes }) {
   const [amountUSD, setUSD] = useState(0);
   const [amountOther, setCurrency] = useState(0);
   const [activeInputUSD, setActiveInputUSD] = useState(false);
-
   useEffect(() => {
     setActiveInputUSD(true);
   }, [amountUSD]);
   useEffect(() => {
     setActiveInputUSD(false);
   }, [amountOther]);
-
   const usd = e => setUSD(e.target.value);
   const cur = e => setCurrency(e.target.value);
-
   const usdConvert = activeInputUSD
     ? amountUSD
     : convertCurrency(
@@ -57,7 +63,9 @@ function CurrencyInput({ currencySelected, quotes }) {
         true,
         activeInputUSD
       );
-  const otherConvert = !activeInputUSD ? amountOther : convertCurrency(
+  const otherConvert = !activeInputUSD
+    ? amountOther
+    : convertCurrency(
         quotes,
         currencySelected,
         amountUSD,
@@ -65,44 +73,37 @@ function CurrencyInput({ currencySelected, quotes }) {
         activeInputUSD
       );
   return (
-    <div>
-        <input
-          className={inputStyle}
-          type="number"
-          value={usdConvert}
-          onChange={usd}
-        />
-        <input
-          className={inputStyle}
-          type="number"
-          value={otherConvert}
-          onChange={cur}
-        />
-    </div>
+    <Container>
+      <Input type="number" value={usdConvert} onChange={usd} />
+      <Input type="number" value={otherConvert} onChange={cur} />
+    </Container>
   );
 }
-
 export const displayExchangeRate = (source, otherCurrency, quotes) => {
-  const selectedCurrency = otherCurrency !== undefined ? otherCurrency.slice(3) : 'Select currency'
-  const currencyValue = otherCurrency ? quotes[otherCurrency] : ''
+  const selectedCurrency =
+    otherCurrency !== undefined ? otherCurrency.slice(3) : "Select currency";
+  const currencyValue = otherCurrency ? quotes[otherCurrency] : "";
+  const ifNoCurrencySelected = selectedCurrency === "Select currency";
   return (
     <React.Fragment>
-      <span>{`1 ${source} = ${currencyFormatter['/'](1, currencyValue)} ${selectedCurrency}`}</span> -
-      <span>{`1 ${selectedCurrency} = ${currencyFormatter['*'](1, currencyValue)} ${source}`}</span>
+      {ifNoCurrencySelected ? (
+        <Text>Please select your currency</Text>
+      ) : (
+        <LabelContainer>
+          <p>{`1 ${source} = ${currencyFormatter["/"](1,currencyValue)} ${selectedCurrency}`}</p>{" "}
+          <p>{`1 ${selectedCurrency} = ${currencyFormatter["*"](1,currencyValue)} ${source}`}</p>
+        </LabelContainer>
+      )}
     </React.Fragment>
   );
 };
-
 export default function CurrencyInputContainer(props) {
   const [currencySelected, setCurrency] = useState();
-
   const getSelectedCurrency = value => setCurrency(value);
-
   return (
-    <div style={{ background: "#C2BBFA", margin: 20, padding: 20 }}>
-      <h2>input container</h2>
-      <React.Fragment>
-        {displayExchangeRate(props.source, currencySelected, props.quotes)}
+    <React.Fragment>
+      {displayExchangeRate(props.source, currencySelected, props.quotes)}
+      <div>
         <CurrencyDropdown
           {...props}
           getSelectedCurrency={getSelectedCurrency}
@@ -111,7 +112,7 @@ export default function CurrencyInputContainer(props) {
           quotes={props.quotes}
           currencySelected={currencySelected}
         />
-      </React.Fragment>
-    </div>
+      </div>
+    </React.Fragment>
   );
 }
