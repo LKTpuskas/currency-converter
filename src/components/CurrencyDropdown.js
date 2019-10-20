@@ -1,11 +1,12 @@
 import React from "react";
 import { Dropdown } from "semantic-ui-react";
+import { convertCountryCode } from '../Utils'
 
 function getCurrency(quotes) {
   const currencies = Object.keys(quotes).map(key => key.slice(3));
   return currencies.map(currency => ({
     key: currency,
-    text: currency,
+    text: convertCountryCode(currency),
     value: currency
   }));
 }

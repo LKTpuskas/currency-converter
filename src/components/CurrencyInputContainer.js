@@ -14,7 +14,7 @@ const inputStyle = css`
   }
 `;
 
-function convertCurrency(
+export function convertCurrency(
   quotes,
   currencySelected,
   inputValue,
@@ -82,7 +82,7 @@ function CurrencyInput({ currencySelected, quotes }) {
   );
 }
 
-const displayExchangeRate = (source, otherCurrency, quotes) => {
+export const displayExchangeRate = (source, otherCurrency, quotes) => {
   const selectedCurrency = otherCurrency !== undefined ? otherCurrency.slice(3) : 'Select currency'
   const currencyValue = otherCurrency ? quotes[otherCurrency] : ''
   return (
