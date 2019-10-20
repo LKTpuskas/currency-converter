@@ -19,13 +19,38 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  
+  useEffect(() => {
+        let cancel = false;
+        const fetchData = async () => {
+          setIsError(false);
+          setIsLoading(true);
+    
+          try {
+            const result = await axios(API);
+    
+            if (cancel) {
+              return;
+            }
+            setData(result.data);
+          } catch (error) {
+            setIsError(true);
+            console.log('Something went wrong', isError);
+          }
+    
+          setIsLoading(false);
+        };
+        setIsLoading(false);
+        fetchData();
+        return () => {
+          cancel = true;
+        };
+      }, [setData]);
 
   return (
     <div>
       <h1>Currency Converter</h1>
       {!isLoading && data !== undefined ? (
-      <h1>TEST</h1>
+      <CurrencyInputContainer {...data} />
       ) : (
         <ClipLoader
           css={override}
