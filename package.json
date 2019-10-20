@@ -1,31 +1,26 @@
 {
-  "name": "react-redux-starter",
+  "name": "currency-converter",
   "version": "1.0.0",
-  "description": "preferred react-redux setup for small to medium sized applications",
+  "description": "TBC",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "s": "nodemon ./server/index.js --exec babel-node",
-    "test": "cross-env NODE_ENV=test ./node_modules/karma/bin/karma start --single-run --browsers PhantomJS",
+    "test": "NODE_ENV=test ./node_modules/karma/bin/karma start --single-run false --browsers Chrome",
     "build": "node_modules/.bin/webpack --watch",
     "coveralls": "cat ./coverage/*/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Jukejc/react-redux-starter.git"
-  },
-  "author": "Jason Chambers",
+  "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Jukejc/react-redux-starter/issues"
-  },
-  "homepage": "https://github.com/Jukejc/react-redux-starter#readme",
   "dependencies": {
+    "@babel/runtime": "^7.6.3",
     "axios": "^0.19.0",
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
+    "countries-list": "^2.4.3",
+    "currency-codes": "^1.5.0",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
     "morgan": "^1.8.2",
@@ -42,32 +37,37 @@
     "styled-components": "^4.4.0"
   },
   "devDependencies": {
-    "babel-cli": "6.26.0",
-    "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
-    "babel-plugin-istanbul": "^4.1.4",
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-polyfill": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-1": "^6.24.1",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/plugin-transform-async-to-generator": "^7.5.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/polyfill": "^7.6.0",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-istanbul": "^5.2.0",
     "chai": "^4.0.2",
     "coveralls": "^2.13.1",
     "cross-env": "^5.0.0",
-    "enzyme": "^2.8.2",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "jasmine": "^3.5.0",
+    "jest": "^24.9.0",
     "karma": "^1.7.0",
     "karma-babel-preprocessor": "^6.0.1",
+    "karma-chrome-launcher": "^3.1.0",
     "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^2.0.1",
     "karma-mocha": "^1.3.0",
     "karma-nyan-reporter": "^0.2.5",
-    "karma-phantomjs-launcher": "^1.0.4",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
     "mocha": "^3.4.2",
     "nodemon": "1.12.1",
-    "react-addons-test-utils": "^15.5.1",
     "react-dom": "^16.10.2",
+    "react-hot-loader": "^4.12.15",
     "react-test-renderer": "^16.10.2",
-    "webpack": "^2.6.1"
+    "webpack": "^2.7.0"
   }
 }
