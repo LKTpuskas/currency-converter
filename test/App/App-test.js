@@ -2,8 +2,6 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import App from '../../src/components/app';
-import { currencyFormatter } from '../../src/Utils'
-import CurrencyInputContainer from '../../src/components/CurrencyInputContainer'
 
 const setup = (extraProps = {}) => {
   const props = {
@@ -21,5 +19,3 @@ describe('<App />', function() {
     expect(wrapper.length).toBe(1)
   })
 });
-
-// expect(currencyFormatter['/'](2, 1.5)).equal({})

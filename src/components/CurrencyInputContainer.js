@@ -82,7 +82,7 @@ function CurrencyInput({ currencySelected, quotes }) {
         false,
         activeInputUSD
       );
-      
+
   return (
     <Container>
       <Input type="number" value={usdConvert} onChange={usd} />
@@ -101,14 +101,16 @@ export const displayExchangeRate = (source, otherCurrency, quotes) => {
         <Text>Please select your currency</Text>
       ) : (
         <LabelContainer>
-          <p>{`1 ${source} = ${currencyFormatter["/"](
+         <p>{`1 ${source} = ${currencyFormatter["*"](
             1,
             currencyValue
-          )} ${selectedCurrency}`}</p>{" "}
-          <p>{`1 ${selectedCurrency} = ${currencyFormatter["*"](
+          )} ${selectedCurrency}`}</p>
+         {" "}
+         <p>{`1 ${selectedCurrency} = ${currencyFormatter["/"](
             1,
             currencyValue
           )} ${source}`}</p>
+         
         </LabelContainer>
       )}
     </React.Fragment>
