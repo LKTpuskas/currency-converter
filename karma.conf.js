@@ -40,10 +40,10 @@ const webpackConfig = {
 module.exports = function(config) {
   config.set({
     basePath: '',
-    browsers: ['PhantomJS'],
-    frameworks: ['mocha'],
+    browsers: ['Chrome', 'Chrome_without_security'],
+    frameworks: ['jasmine'],
     files: [
-      'node_modules/babel-polyfill/dist/polyfill.js',
+      /* 'node_modules/babel-polyfill/dist/polyfill.js' */
       'test/root.js'
     ],
 
