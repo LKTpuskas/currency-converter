@@ -1,7 +1,8 @@
 import React from "react";
 import { Dropdown } from "semantic-ui-react";
-import { convertCountryCode } from '../Utils';
+import { convertCountryCode } from "../Utils";
 import styled from "styled-components";
+
 const GREY_BLUE = "#30455e";
 const WHITE = "#fff";
 // Overriding semantic-ui-react styles
@@ -17,11 +18,13 @@ const CustomDropdown = styled(Dropdown)`
     }
   }
 `;
+
 const Container = styled.div`
   display: grid;
   grid-template-columns: 350px 350px;
   grid-gap: 48px;
 `;
+
 function getCurrency(quotes) {
   const currencies = Object.keys(quotes).map(key => key.slice(3));
   return currencies.map(currency => ({
@@ -30,6 +33,7 @@ function getCurrency(quotes) {
     value: currency
   }));
 }
+
 export default function CurrencyDropdown(props) {
   const [value, setValue] = React.useState();
   const handleChange = (e, { value }) => {
